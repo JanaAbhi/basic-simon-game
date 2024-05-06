@@ -8,7 +8,11 @@ let started = false;
 
 let level = 0;
 
-//To start the game 
+let score = 0;
+
+let highScore = 0;
+
+//To start the game
 $(document).keypress(function () {
   if (!started) {
     $("#level-title").text("Level " + level);
@@ -17,8 +21,10 @@ $(document).keypress(function () {
   }
 });
 
+// user clicking colors
 $(".btn").click(function () {
-  let userChosenColor = $(this).attr("id")
+  let userChosenColor = $(this).attr("id");
+  // console.log(userChosenColor);
 
   userClickedPattern.push(userChosenColor);
 
@@ -26,11 +32,10 @@ $(".btn").click(function () {
   animatePress(userChosenColor);
   checkAnswer(userClickedPattern.length - 1);
 });
- 
-
 // To check user selection and gamePattern
 
 function checkAnswer(currentLevel) {
+  console.log(currentLevel);
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     console.log("success");
 
@@ -49,7 +54,7 @@ function checkAnswer(currentLevel) {
     setTimeout(() => {
       $("body").removeClass("game-over");
     }, 200);
-    
+
     $("#level-title").text("Game Over,Press Any key To Rest");
     startOver();
   }
@@ -60,6 +65,7 @@ function checkAnswer(currentLevel) {
 function nextSequence() {
   userClickedPattern = [];
   level++;
+  score++;
   $("#level-title").text("Level " + level);
   let randomNumber = Math.floor(Math.random() * 4);
   let randomChosenColor = buttonColors[randomNumber];
@@ -71,9 +77,15 @@ function nextSequence() {
     .fadeIn(100);
 
   playSound(randomChosenColor);
+
+  if (score > highScore) {
+    highScore = score;
+  }
+  $("#currentScore").text("Score:" + score);
+  $("#score").text("High Score:" + highScore);
 }
 
-//sound while play and click 
+//sound while play and click
 function playSound(name) {
   let sounds = new Audio("sounds/" + name + ".mp3");
   sounds.play();
@@ -88,7 +100,8 @@ function animatePress(currentColor) {
 }
 
 function startOver() {
-  level = 0;
+  level =0;
+  score = -1;
   gamePattern = [];
   started = false;
 }

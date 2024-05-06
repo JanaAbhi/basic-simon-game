@@ -9,12 +9,21 @@ body {
   margin:  5%;
   color: #FEF2BF;
 }
-
+.highScore__level{
+  font-size: 2rem;
+  margin-left:50% ;
+  color: #fff;
+}
+.currentScore__level{
+  font-size: 2rem;
+  color: #fff;
+}
 .container {
-  display: block;
+  display: grid;
   width: 50%;
   margin: auto;
-
+  grid-template-rows: repeat(2,1fr);
+  grid-template-columns: repeat(2,1fr);
 }
 
 .btn {
