@@ -19,11 +19,9 @@ body {
   color: #fff;
 }
 .container {
-  display: grid;
+  display: block;
   width: 50%;
-  margin: auto;
-  grid-template-rows: repeat(2,1fr);
-  grid-template-columns: repeat(2,1fr);
+  margin:auto;
 }
 
 .btn {
@@ -60,3 +58,4 @@ body {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
+
